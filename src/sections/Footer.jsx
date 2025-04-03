@@ -3,7 +3,7 @@ import { Facebook, Youtube, Instagram, ChevronDown } from "lucide-react";
 
 const FooterWrapper = styled.footer`
   background-color: #fff;
-  border-top: 1px solid #ddd;
+
   padding: 2rem 1rem;
   color: #333;
   font-size: 0.85rem;

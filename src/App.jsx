@@ -1,20 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, {  css } from 'styled-components';
-import Header from "./components/Header";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GlobalStyle from "./styles/GlobalStyle";
-import FooterScrollProgressBar from "./components/FooterScrollProgressBar";
-import Footer from './sections/Footer';
-import TypoPosterSection from './sections/TypoPosterSection';
-import ProductListSection from './sections/ProductListSection';
+import Header from "./components/Header";
 import HeroSection from './sections/HeroSection';
+import TypoPosterSection from './sections/TypoPosterSection';
+import ProductInfoSection from './sections/ProductInfoSection';
+import ProductListSection from './sections/ProductListSection';
+import ScrollToTopButton from './components/ScrollToTopButton';
+import Footer from './sections/Footer';
+import FooterScrollProgressBar from "./components/FooterScrollProgressBar";
+import ProductDetailSection from './sections/ProductDetailSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
   const horizontalRef1 = useRef(null);
-  const horizontalRef2 = useRef(null);
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function App() {
   }, []);
 
   useHorizontalScroll(horizontalRef1, isMobile, 'panel1');
-  useHorizontalScroll(horizontalRef2, isMobile, 'panel2');
+
 
   return (
     <>
@@ -37,13 +40,9 @@ export default function App() {
         <FooterScrollProgressBar/>
         <HeroSection/>
 
-        <Section bg="#FEC8D8">Section 2</Section>
-        <Section bg="#FEC8D8">Section 3</Section>
-        <Section bg="#FEC8D8">Section 4</Section>
-        <Section bg="#FEC8D8">Section 5</Section>
+        
         <HorizontalWrapper ref={horizontalRef1} isMobile={isMobile}>
         <TypoPosterSection
-            classType = "panel1"
             bg="#0F3BAE"
              leftText="Simply"
             rightText="Zero"
@@ -57,7 +56,6 @@ export default function App() {
            hashtag="#설탕ZERO #칼로리50%DOWN"
           />
              <TypoPosterSection
-              classType = "panel1"
                 bg="#0BC362"
                 leftText="Squeeze"
                 rightText="& Go"
@@ -65,7 +63,6 @@ export default function App() {
                 hashtag="#가년하게짜먹는 #컴팩트스틱"
               />
             <TypoPosterSection
-             classType = "panel1"
                 bg="#F0048C"
                 leftText="Sweet &"
                 rightText="Tasty"
@@ -79,54 +76,14 @@ export default function App() {
                  />
              </HorizontalWrapper>
 
-        <Section bg="#C1C8E4">Section 6</Section>
-
-        <HorizontalWrapper ref={horizontalRef2} isMobile={isMobile}>
-        <TypoPosterSection
-            classType = "panel2"
-            bg="#0F3BAE"
-             leftText="Simply"
-            rightText="Zero"
-            subtitle={
-             <>
-              제로칼로리로 <br />
-              더 가볍게, 새롭게
-             </>
-             }
-             animate={true}
-           hashtag="#설탕ZERO #칼로리50%DOWN"
-          />
-             <TypoPosterSection
-              classType = "panel2"
-                bg="#0BC362"
-                leftText="Squeeze"
-                rightText="& Go"
-                subtitle="물 없이 더 편리한"
-                hashtag="#가년하게짜먹는 #컴팩트스틱"
-              />
-            <TypoPosterSection
-             classType = "panel2"
-                bg="#F0048C"
-                leftText="Sweet &"
-                rightText="Tasty"
-                   subtitle={
-                     <>
-                       설탕 대신 알룰로스로 <br />
-                       더 맛있게, 가볍게
-                      </>
-                     }
-                   hashtag="#청사과 #납작복숭아"
-                 />
-             </HorizontalWrapper>
-
-            
-             <Section bg="#C1C8E4">Section 7</Section>
-             <Section bg="#0F3BAE">Section 8</Section>
-
-        <ProductListSection bg="#C1C8E4" />
+    
+        <ProductDetailSection/>
+        <ProductInfoSection/>
+        <ProductListSection />
         <FinalSection>
           <Footer />
         </FinalSection>
+        <ScrollToTopButton />
       </Wrapper>
     </>
   );
@@ -161,7 +118,7 @@ function useHorizontalScroll(ref, isMobile, panelClass) {
             snapTo: 1 / (panels.length - 1),
             duration: { min: 0.6, max: 1 },
             delay: 0.1,
-            ease: 'power1.inOut'
+            ease: 'power4.inOut'
           },
           end: () => `+=${elem.offsetWidth}`,
         },
@@ -196,21 +153,6 @@ const Wrapper = styled.div`
 `;
 
 
-
-
-const Section = styled.section`
-  height: 100vh;
-  background-color: ${(props) => props.bg};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  scroll-snap-align: start;
-  z-index: 5;
-  position: relative;
-`;
 
 const HorizontalWrapper = styled.section`
   display: flex;

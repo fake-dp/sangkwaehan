@@ -9,10 +9,10 @@ export default function TypoPosterSection({
   subtitle,
   hashtag,
   animate = false,
-  classType
+
 }) {
   return (
-    <Panel bg={bg} className={`panel ${classType}`}>
+    <Panel bg={bg} className="panel panel1">
       <TextWrapper>
         <LeftText
           as={motion.h1}
