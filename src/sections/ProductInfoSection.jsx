@@ -1,13 +1,13 @@
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const Section = styled.section`
-  background-color: #e6f7ff;
-  padding: 5rem 1rem;
+  background-color: #f0f4f8;
+  padding: 6rem 1rem;
 `;
 
 const Inner = styled.div`
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 `;
@@ -15,16 +15,16 @@ const Inner = styled.div`
 const Title = styled.h2`
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
+  color: #222;
+
+  span {
+    color: #1890ff;
+  }
 
   @media (min-width: 768px) {
     font-size: 2.5rem;
   }
-`;
-
-const Description = styled.p`
-  margin-bottom: 3rem;
-  color: #555;
 `;
 
 const Grid = styled.div`
@@ -38,69 +38,80 @@ const Grid = styled.div`
 `;
 
 const Card = styled.div`
-  background-color: white;
+  background: white;
+  border-radius: 1.5rem;
   padding: 2rem;
-  border-radius: 1rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 `;
 
+const Badge = styled.div`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-color: #ff007a;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+`;
+
+const ImageBox = styled.div`
+  width: 100%;
+  height: 200px;
+  border-radius: 1rem;
+  background-color: ${(props) => props.bg || "#eee"};
+  margin-bottom: 1.25rem;
+`;
+
+const ProductName = styled.p`
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #222;
+`;
+
+
 export default function ProductInfoSection() {
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current || cardsRef.current.length === 0) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-
-      if (inView) {
-        cardsRef.current.forEach((el, i) => {
-          if (el) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-            el.style.transitionDelay = `${i * 0.2}s`;
-          }
-        });
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const infos = [
+  const products = [
     {
-      title: "강력한 제형 기술력",
-      desc: "유효성분을 한 제형에 농축한 상쾌환만의 기술력",
+      title: "상쾌환",
+      bgColor: "#d1ecff",
+      isNew: false,
     },
     {
-      title: "과학적으로 증명된 효과",
-      desc: "인체적용시험을 통해 아세트알데히드 감소 효과 입증",
+      title: "상쾌환 스틱",
+      bgColor: "#fff",
+      isNew: true,
     },
     {
-      title: "언제 어디서나 간편하게",
-      desc: "포켓사이즈로 휴대와 복용이 간편",
+      title: "상쾌환 BOOSTER",
+      bgColor: "#fff",
+      isNew: false,
     },
   ];
 
   return (
-    <Section ref={sectionRef}>
+    <Section>
       <Inner>
-        <Title>상쾌환의 3가지 속쾌 포인트</Title>
-        <Description>
-          기술력, 검증된 효능, 간편한 휴대성까지 모두 갖춘 제품
-        </Description>
+        <Title>
+          <span>상쾌환</span> 제품 보러가기
+        </Title>
 
         <Grid>
-          {infos.map((info, index) => (
-            <Card key={index} ref={(el) => (cardsRef.current[index] = el)}>
-              <h3 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>{info.title}</h3>
-              <p style={{ fontSize: "0.9rem", color: "#666" }}>{info.desc}</p>
+          {products.map((item, index) => (
+            <Card
+              key={index}
+              as={motion.div}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              {item.isNew && <Badge>NEW</Badge>}
+              <ImageBox bg={item.bgColor}>
+                {/* 추후 이미지 삽입 자리 */}
+              </ImageBox>
+              <ProductName>{item.title}</ProductName>
             </Card>
           ))}
         </Grid>

@@ -31,7 +31,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Wrapper>
+      <Wrapper isMobile={isMobile}>
         <Header />
             <FooterScrollProgressBar/>
         <HeroSection>
@@ -182,9 +182,19 @@ function useHorizontalScroll(ref, isMobile, panelClass) {
 const Wrapper = styled.div`
   width: 100%;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+
+  ${(props) =>
+    props.isMobile
+      ? css`
+          scroll-snap-type: none;
+          scroll-behavior: auto;
+        `
+      : css`
+          scroll-snap-type: y mandatory;
+          scroll-behavior: smooth;
+        `}
 `;
+
 
 const HeroSection = styled.section`
   height: 100vh;
