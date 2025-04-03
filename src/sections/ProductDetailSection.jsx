@@ -50,7 +50,7 @@ const Section = styled.section`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 10rem 2rem;
+  padding: 10rem 0 10rem 6rem;
   background: #fff;
   @media (max-width: 768px) {
     flex-direction: column;
@@ -60,6 +60,7 @@ const Section = styled.section`
 
 const Left = styled.div`
   flex: 1;
+ 
 `;
 
 const Right = styled.div`
