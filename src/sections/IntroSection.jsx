@@ -2,12 +2,12 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const SectionContainer = styled.section`
-  min-height: 100vh;
+  /* min-height: 100vh;
   background-color: #003a8c;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1rem;
+  padding: 4rem 1rem; */
 `;
 
 const ContentWrapper = styled.div`

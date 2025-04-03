@@ -7,6 +7,7 @@ const FooterWrapper = styled.footer`
   padding: 2rem 1rem;
   color: #333;
   font-size: 0.85rem;
+  width: 100%;
 `;
 
 const Inner = styled.div`

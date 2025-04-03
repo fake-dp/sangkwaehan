@@ -2,8 +2,16 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  background-color: #f5f5f5;
-  padding: 5rem 1rem;
+  height: 100vh;
+  background-color: ${(props) => props.bg};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+  scroll-snap-align: start;
 `;
 
 const Inner = styled.div`

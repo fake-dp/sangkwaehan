@@ -7,23 +7,24 @@ const BottomBar = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  max-width: 100vw;
   background: white;
   z-index: 1000;
   box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.05);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  pointer-events: ${(props) => (props.visible ? "auto" : "none")};
 `;
 
 const Progress = styled.div`
   height: 3px;
   background-color: #1890ff;
-  transition: width 0.2s ease;
 `;
 
 const Inner = styled.div`
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem 1.25rem; /* 높이 증가 */
+  padding: 1rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,7 +54,7 @@ const Tabs = styled.ul`
   font-size: 0.875rem;
   color: #888;
   font-weight: 500;
-  list-style: none; /* 점 제거 */
+  list-style: none;
   padding: 0;
   margin: 0;
 
@@ -89,22 +90,25 @@ export default function FooterScrollProgressBar() {
       const docHeight = document.documentElement.scrollHeight;
       const winHeight = window.innerHeight;
       const percent = (scrollTop / (docHeight - winHeight)) * 100;
-      setProgress(percent);
+      setProgress(Math.min(Math.max(percent, 0), 100));
 
+  
       if (footerRef.current) {
         const footerTop = footerRef.current.getBoundingClientRect().top;
-        setVisible(footerTop > window.innerHeight);
+        setVisible(footerTop > winHeight);
       }
     };
 
     window.addEventListener("scroll", onScroll);
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
-    <BottomBar style={{ opacity: visible ? 1 : 0 }}>
+    <BottomBar visible={visible}>
       <Progress style={{ width: `${progress}%` }} />
       <Inner>
         <Left>

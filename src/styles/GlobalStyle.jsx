@@ -12,8 +12,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #fff;
     color: #000;
     line-height: 1.4;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+
   margin: 0;
   padding: 0;
   }
