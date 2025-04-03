@@ -8,7 +8,6 @@ import FooterScrollProgressBar from "./components/FooterScrollProgressBar";
 import Footer from './sections/Footer';
 import TypoPosterSection from './sections/TypoPosterSection';
 import ProductListSection from './sections/ProductListSection';
-import HeroSection from './sections/HeroSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,13 +33,14 @@ export default function App() {
       <GlobalStyle />
       <Wrapper isMobile={isMobile}>
         <Header />
-        <FooterScrollProgressBar/>
-        <HeroSection/>
+            <FooterScrollProgressBar/>
+        <HeroSection>
+          <Title>Welcome</Title>
+          <SubTitle>test 중</SubTitle>
+        </HeroSection>
 
         <Section bg="#FEC8D8">Section 2</Section>
-        <Section bg="#FEC8D8">Section 3</Section>
-        <Section bg="#FEC8D8">Section 4</Section>
-        <Section bg="#FEC8D8">Section 5</Section>
+
         <HorizontalWrapper ref={horizontalRef1} isMobile={isMobile}>
         <TypoPosterSection
             classType = "panel1"
@@ -196,7 +196,30 @@ const Wrapper = styled.div`
 `;
 
 
+const HeroSection = styled.section`
+  height: 100vh;
+  background: #00A5E7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  scroll-snap-align: start;
+`;
 
+const Title = styled.h1`
+  font-size: 4rem;
+  color: white;
+  margin-bottom: 1rem;
+  animation: fadeIn 2s ease-out forwards;
+`;
+
+const SubTitle = styled.h2`
+  font-size: 1.5rem;
+  color: #f2eaff;
+  opacity: 0.9;
+  animation: fadeIn 3s ease-out forwards;
+`;
 
 const Section = styled.section`
   height: 100vh;
@@ -208,8 +231,6 @@ const Section = styled.section`
   font-weight: bold;
   text-transform: uppercase;
   scroll-snap-align: start;
-  z-index: 5;
-  position: relative;
 `;
 
 const HorizontalWrapper = styled.section`

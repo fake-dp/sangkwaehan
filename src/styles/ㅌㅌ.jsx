@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import styled from "styled-components";
 
-export default function HeroSection() {
+export default function EasyTomorrowScrollClone() {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -54,27 +54,21 @@ const StickyContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* 클릭 방지 시 */
 `;
 
 const AnimatedBox = styled(motion.div)`
-  width: 300px;
+  width: 100%;
   height: 300px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
- 
+  background: #0F3BAE;
+  position: absolute;
+  z-index: 1;
 `;
 
 const AnimatedText = styled(motion.div)`
-  position: fixed; /* 이 부분도 고정되어야 자연스러움 */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
   color: black;
   font-size: 2rem;
   font-weight: bold;
-
+  z-index: 2;
   text-align: center;
 `;
